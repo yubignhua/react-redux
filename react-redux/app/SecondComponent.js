@@ -19,6 +19,7 @@ class SecondComponent extends React.Component{
             {this.props.school}
             {this.props.address}
             {this.props.phone}
+            <div>hello git</div>
 
         </div>
     }
