@@ -2,8 +2,8 @@
  * Created by wurui on 2017/7/2.
  */
 import React from 'react';
-import {reducerStore,store} from './boot';
-import './main.css';
+import {reducerStore,store} from '../core/boot';
+import '../main.css';
 import {Model} from './model'
 
 

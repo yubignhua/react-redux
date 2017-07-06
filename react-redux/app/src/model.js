@@ -2,7 +2,7 @@
  * Created by wurui on 2017/7/2.
  */
 import React from 'react';
-import './main.css';
+import '../main.css';
 
 class Model extends React.Component{
     render(){

@@ -1,5 +1,5 @@
 import React from 'react';
-import {reducerStore,store} from './boot'
+import {reducerStore,store} from '../core/boot'
 
 
 
