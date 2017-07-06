@@ -47,8 +47,6 @@ class MySecondComp extends React.Component{
         this.updtateContent = "";
     }
 
-
-
     update(){
         this.props.modify(this.state.index,this.updtateContent);
         this.setState({
@@ -56,6 +54,10 @@ class MySecondComp extends React.Component{
         })
     };
 
+	/**
+     * 显示弹出框
+     * @param index
+     */
     showModel(index){
         this.setState({
             flag:true,
@@ -63,12 +65,14 @@ class MySecondComp extends React.Component{
         });
     };
 
+    giveName(){
+        alert("youname")
+    }
+
     saveContent(event){
         console.log(event.target.value);
         this.updtateContent = event.target.value;
     };
-
-
 
     render(){
         console.log(this.props.data.toJS());
@@ -76,6 +80,7 @@ class MySecondComp extends React.Component{
         var that = this;
         return(
             <div className="mysecondcomp">
+                <div>花名册：</div>
                 <div>
                     {classmates.map(function (item,index) {
                         return <div className="msc-wraper" key={index}>{item}
