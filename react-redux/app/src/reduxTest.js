@@ -65,10 +65,6 @@ class MySecondComp extends React.Component{
         });
     };
 
-    giveName(){
-        console.log("1111111111111111111");
-        this.showModel();
-    }
 
     saveContent(event){
         console.log(event.target.value);
