@@ -15,7 +15,7 @@ reducerStore.createStores("MySecondComp",{
     },
     update(state,action){
         return state.updateIn(["classmates",action.index],function (item) {
-            console.log("item",item);
+            //console.log("item",item);
             return action.content
         })
     }
@@ -28,7 +28,7 @@ var mapDispatchToPropss = (dispatch)=>{
             dispatch({type:"delete",index:index})
         },
         modify(index,content){
-            console.log(index,content);
+            //console.log(index,content);
             dispatch({type:"update",index:index,content:content})
         }
     }
@@ -40,7 +40,9 @@ class MySecondComp extends React.Component{
 
 
     state = {
-        flag:false
+        flag:false,
+        index:0,
+        name:""
     };
 
     componentWillMount(){
@@ -48,8 +50,9 @@ class MySecondComp extends React.Component{
     }
 
 
-    update(){
-        this.props.modify(this.state.index,this.updtateContent);
+    update(index){
+        console.log(index)
+        this.props.modify(index,this.updtateContent);
         this.setState({
             flag:false
         })
@@ -59,37 +62,44 @@ class MySecondComp extends React.Component{
      * 显示弹出框
      * @param index
      */
-    showModel(index){
+    showModel(index,name){
         this.setState({
             flag:true,
-            index:index
+            index:index,
+            name:name,
         });
     };
 
 
     saveContent(event){
-        console.log(event.target.value);
+        console.log("event.target.value",event.target.value);
+        this.setState({name:event.target.value||this.state.name});
+        console.log(this.state);
         this.updtateContent = event.target.value;
     };
 
     render(){
-        console.log(this.props.data.toJS());
+        //console.log(this.props.data.toJS());
         var {classmates} = this.props.data.toJS();
         var that = this;
+        let {flag,name,index} = this.state;
         return(
             <div className="mysecondcomp">
-                <div>花名册：</div>
-                <div>
+                <div className="title">班级花名册：</div>
+                <div className="box">
                     {classmates.map(function (item,index) {
-                        return <div className="msc-wraper" key={index}>{item}
-                            <span onClick={that.props.deleteName.bind(that,index)}>删除</span>
-                            <span onClick={that.showModel.bind(that,index)}>修改</span>
-                        </div>
+                        return(
+                            <div className="msc-wraper" key={index}>
+                                <div className="item">{item}</div>
+                                <span onClick={that.props.deleteName.bind(that,index)}>删除</span>
+                                <span onClick={that.showModel.bind(that,index,item)}>修改</span>
+                            </div>
+                        )
                     })}
                 </div>
-                <Model isShow={this.state.flag}>
-                    <input placeholder="请填写您的修改" onChange={this.saveContent.bind(this)} className="m_input" type="text"/>
-                    <button onClick={this.update.bind(this)}>保存</button>
+                <Model isShow={flag}>
+                    <input placeholder={name} value={name} onChange={this.saveContent.bind(this,)} className="m_input" type="text"/>
+                    <button onClick={this.update.bind(this,index)}>保存</button>
                 </Model>
             </div>
         )

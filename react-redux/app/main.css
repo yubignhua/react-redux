@@ -7,9 +7,24 @@
 .msc-wraper span{
     color: red;
     padding-left:10px;
+    cursor: pointer;
+    float: right;
+}
+.msc-wraper span:nth-child(2){
+    padding-left:40px;
+}
+
+.mysecondcomp .title{
+    padding-bottom:10px;
+}
+.mysecondcomp .msc-wraper {
+    overflow: hidden;
 }
 
 
+.mysecondcomp .item{
+    float: left;
+}
 .model{
     width:300px;
     height:100px;
