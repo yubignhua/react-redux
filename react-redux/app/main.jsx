@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MyCompBox from './App';
-import {MySecondComp} from './reduxTest';
+import MyCompBox from './src/App';
+import {MySecondComp} from './src/reduxTest';
 
 // Store
 ReactDOM.render(
