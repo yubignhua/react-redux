@@ -5,7 +5,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ThirdComponent from './617component'
 
-
 ReactDOM.render(
 
     <ThirdComponent />,

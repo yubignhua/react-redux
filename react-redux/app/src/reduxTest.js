@@ -47,6 +47,7 @@ class MySecondComp extends React.Component{
         this.updtateContent = "";
     }
 
+
     update(){
         this.props.modify(this.state.index,this.updtateContent);
         this.setState({
