@@ -66,7 +66,8 @@ class MySecondComp extends React.Component{
     };
 
     giveName(){
-        alert("youname")
+        console.log("1111111111111111111");
+        this.showModel();
     }
 
     saveContent(event){
