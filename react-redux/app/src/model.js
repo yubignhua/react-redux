@@ -6,8 +6,9 @@ import '../main.css';
 
 class Model extends React.Component{
     render(){
+        var {isShow} = this.props;
         return(
-            <div className="model" style={{display:this.props.isShow?"block":"none"}}>
+            <div className={"model "+(isShow?"trans":"")}>
                 <div className="model_content">
                     {this.props.children}
                 </div>

@@ -8,6 +8,7 @@ import {Model} from './model'
 
 
 reducerStore.createStores("MySecondComp",{
+    //班级花名册列表
     classmates:["俞小锋","许文渲","刘雪峰","聊天器"]
 },{
     delete(state,action){
@@ -15,7 +16,7 @@ reducerStore.createStores("MySecondComp",{
     },
     update(state,action){
         return state.updateIn(["classmates",action.index],function (item) {
-            //console.log("item",item);
+            console.log("item",item);
             return action.content
         })
     }
@@ -37,25 +38,25 @@ var mapDispatchToPropss = (dispatch)=>{
 
 @store(mapDispatchToPropss)
 class MySecondComp extends React.Component{
-
-
     state = {
-        flag:false,
-        index:0,
-        name:""
+        flag:false,//控制弹窗是否显示
+        index:0,//记录更改内容的位置
+        name:"",//更改内容的名称
     };
 
     componentWillMount(){
         this.updtateContent = "";
     }
 
-
+	/**
+     * 保存并更新内容
+     * @param index
+     */
     update(index){
-        console.log(index)
+        this.setState({flag:false});
+        if(this.updtateContent == "") return;
         this.props.modify(index,this.updtateContent);
-        this.setState({
-            flag:false
-        })
+
     };
 
 	/**
@@ -63,6 +64,7 @@ class MySecondComp extends React.Component{
      * @param index
      */
     showModel(index,name){
+        this.updtateContent = name;
         this.setState({
             flag:true,
             index:index,
@@ -71,15 +73,23 @@ class MySecondComp extends React.Component{
     };
 
 
+	/**
+     * 关闭弹窗
+     */
+    closeModel(){
+        this.setState({flag:false});
+    }
+
+	/**
+     * 时时存储内容的改变
+     * @param event
+     */
     saveContent(event){
-        console.log("event.target.value",event.target.value);
-        this.setState({name:event.target.value||this.state.name});
-        console.log(this.state);
-        this.updtateContent = event.target.value;
+        this.setState({name:event.target.value});
+        this.updtateContent = event.target.value?event.target.value:"（空）";
     };
 
     render(){
-        //console.log(this.props.data.toJS());
         var {classmates} = this.props.data.toJS();
         var that = this;
         let {flag,name,index} = this.state;
@@ -98,8 +108,9 @@ class MySecondComp extends React.Component{
                     })}
                 </div>
                 <Model isShow={flag}>
-                    <input placeholder={name} value={name} onChange={this.saveContent.bind(this,)} className="m_input" type="text"/>
-                    <button onClick={this.update.bind(this,index)}>保存</button>
+                    <input placeholder={name} value={name} onChange={this.saveContent.bind(this)} className="m_input" type="text"/>
+                    <button className={"btn"} onClick={this.update.bind(this,index)}>保存</button>
+                    <button className={"btns"} onClick={this.closeModel.bind(this,index)}>取消</button>
                 </Model>
             </div>
         )
